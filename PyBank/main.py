@@ -20,14 +20,37 @@ with open(incomingCSV, 'r', newline='') as csvfile:
     #to skip over header row
     csv_header = next(csvreader)
 
+
+
     #loop through each row in csv file
     for row in csvreader:
 
-        Months.append(row[1])
+        Months.append(row[0])
 
         totalMonths = len(Months)
 
+        ProfitLoss.append(row[1])
+
+    sumPL = 0
+
+    for num in ProfitLoss:
+        sumPL += int(num)
+
+    # sumPL = sum(int(ProfitLoss))
+
+
+
+
+
+
+
+
     print(f"Total Months: {totalMonths}")
+    print(f"Total: ${sumPL}")
+
+
+   
+
 
 
 
