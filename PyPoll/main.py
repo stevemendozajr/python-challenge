@@ -16,6 +16,11 @@ KhanVotes = []
 CorreyVotes = []
 LiVotes = []
 OTooleyVotes = []
+#Votes = []
+UniqueCanidateList = []
+CanidateVoteCounter = []
+
+
 
 
 # Open the csv file using "read" mode. Specify the variable to hold the contents
@@ -28,27 +33,38 @@ with open(incomingCSV, 'r', newline='') as csvfile:
     #to skip over header row in the csv file and give it a variale name
     csv_header = next(csvreader)
 
+    TotalVoteCounter = 0
+
     #loop through each row in csv file and store each row data from specifc column
     #into its own list  
     for row in csvreader:
 
+        TotalVoteCounter = TotalVoteCounter + 1
+
         #store each voter id into list named VoterID so we can count total votes later
-        VoterID.append(row[0])
+        ##VoterID.append(row[0])
 
         #store each candiate voted for into a list
         #so we can find unique canidates who received votes
         Canidates.append(row[2])
 
-        #if statement to store every different canidate vote
-        #into its own list so we can count and find percentages
-        if row[2] == 'Khan':
-            KhanVotes.append(row[2])
-        elif row[2] == 'Correy':
-            CorreyVotes.append(row[2])
-        elif row[2] == 'Li':
-            LiVotes.append(row[2])
+
+    for canidate in range(len(Canidates)):
+
+        canidateName = Canidates[canidate]
+
+        if canidateName in UniqueCanidateList:
+
+            canidateNameLocation = UniqueCanidateList.index(canidateName)
+            CanidateVoteCounter[canidateNameLocation] = CanidateVoteCounter[canidateNameLocation] + 1
+
         else:
-            OTooleyVotes.append(row[2])
+            UniqueCanidateList.append(canidateName)
+            CanidateVoteCounter.append(1)
+
+
+        
+
 
     
     #calculation of total votes received
